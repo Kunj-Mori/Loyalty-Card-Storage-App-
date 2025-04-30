@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'firebase_options.dart';
 import 'bloc/loyalty_card_bloc.dart';
 import 'models/loyalty_card.dart';
@@ -22,7 +23,6 @@ void main() async {
     );
   } catch (e) {
     print('Firebase initialization error: $e');
-    // Handle the error appropriately
   }
   
   // Initialize services
@@ -33,7 +33,6 @@ void main() async {
     await storageService.init();
   } catch (e) {
     print('Storage service initialization error: $e');
-    // Handle the error appropriately
   }
 
   runApp(MyApp(
@@ -60,36 +59,128 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Loyalty Card Wallet',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.blue,
-            brightness: Brightness.light,
-          ),
           useMaterial3: true,
-          appBarTheme: const AppBarTheme(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color(0xFF6750A4),
+            brightness: Brightness.light,
+          ).copyWith(
+            secondary: const Color(0xFF625B71),
+          ),
+          textTheme: GoogleFonts.poppinsTextTheme(),
+          appBarTheme: AppBarTheme(
             centerTitle: true,
             elevation: 0,
+            backgroundColor: const Color(0xFF6750A4),
+            foregroundColor: Colors.white,
+            titleTextStyle: GoogleFonts.poppins(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
           ),
           cardTheme: CardTheme(
             elevation: 4,
             shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+          inputDecorationTheme: InputDecorationTheme(
+            filled: true,
+            fillColor: Colors.grey[50],
+            border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(
+                color: Colors.grey[300]!,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(
+                color: Colors.grey[300]!,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: const BorderSide(
+                color: Color(0xFF6750A4),
+                width: 2,
+              ),
+            ),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              elevation: 2,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24,
+                vertical: 12,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              backgroundColor: const Color(0xFF6750A4),
+              foregroundColor: Colors.white,
             ),
           ),
         ),
         darkTheme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.blue,
-            brightness: Brightness.dark,
-          ),
           useMaterial3: true,
-          appBarTheme: const AppBarTheme(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color(0xFF6750A4),
+            brightness: Brightness.dark,
+          ).copyWith(
+            secondary: const Color(0xFFCBC2DB),
+          ),
+          textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
+          appBarTheme: AppBarTheme(
             centerTitle: true,
             elevation: 0,
+            backgroundColor: Colors.transparent,
+            titleTextStyle: GoogleFonts.poppins(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           cardTheme: CardTheme(
             elevation: 4,
             shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+          inputDecorationTheme: InputDecorationTheme(
+            filled: true,
+            fillColor: Colors.grey[900],
+            border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(
+                color: Colors.grey[700]!,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(
+                color: Colors.grey[700]!,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: const BorderSide(
+                color: Color(0xFFCBC2DB),
+                width: 2,
+              ),
+            ),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              elevation: 2,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24,
+                vertical: 12,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              backgroundColor: const Color(0xFF6750A4),
+              foregroundColor: Colors.white,
             ),
           ),
         ),

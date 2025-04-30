@@ -1,6 +1,8 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import '../models/loyalty_card.dart';
 
 class LoyaltyCardWidget extends StatelessWidget {
@@ -17,13 +19,30 @@ class LoyaltyCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    
     return Card(
-      elevation: 4,
+      elevation: 8,
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
       child: InkWell(
         onTap: onTap,
+        borderRadius: BorderRadius.circular(16),
         child: Container(
           padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                theme.colorScheme.primary.withOpacity(0.8),
+                theme.colorScheme.secondary.withOpacity(0.6),
+              ],
+            ),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -33,7 +52,11 @@ class LoyaltyCardWidget extends StatelessWidget {
                   Expanded(
                     child: Text(
                       card.merchantName,
-                      style: Theme.of(context).textTheme.titleLarge,
+                      style: GoogleFonts.poppins(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -41,42 +64,73 @@ class LoyaltyCardWidget extends StatelessWidget {
                     IconButton(
                       icon: const Icon(Icons.delete_outline),
                       onPressed: onDelete,
-                      color: Colors.red,
+                      color: Colors.white,
                     ),
                 ],
-              ),
+              ).animate().fadeIn().slideX(),
               const SizedBox(height: 16),
-              Text(
-                'Card Number: ${card.cardNumber}',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              const SizedBox(height: 8),
-              if (card.expiryDate != null) ...[
-                Text(
-                  'Expires: ${_formatDate(card.expiryDate!)}',
-                  style: Theme.of(context).textTheme.bodyMedium,
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(8),
                 ),
+                child: Text(
+                  'Card Number: ${card.cardNumber}',
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                ),
+              ).animate().fadeIn().slideX(),
+              if (card.expiryDate != null) ...[
                 const SizedBox(height: 8),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    'Expires: ${_formatDate(card.expiryDate!)}',
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
+                  ),
+                ).animate().fadeIn().slideX(),
               ],
+              const SizedBox(height: 24),
               Center(
-                child: card.barcode.startsWith('http')
-                    ? QrImageView(
-                        data: card.barcode,
-                        version: QrVersions.auto,
-                        size: 150.0,
-                      )
-                    : Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Text(
-                          card.barcode,
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
                       ),
-              ),
+                    ],
+                  ),
+                  child: card.barcode.startsWith('http')
+                      ? QrImageView(
+                          data: card.barcode,
+                          version: QrVersions.auto,
+                          size: 150.0,
+                          backgroundColor: Colors.white,
+                        )
+                      : Text(
+                          card.barcode,
+                          style: GoogleFonts.poppins(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                ),
+              ).animate().fadeIn().scale(),
             ],
           ),
         ),
