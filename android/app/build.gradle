@@ -1,0 +1,21 @@
+android {
+    namespace "com.example.external_mad"
+    compileSdkVersion flutter.compileSdkVersion
+    ndkVersion flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId "com.example.external_mad"
+        minSdkVersion 21  // Updated for Firebase
+        targetSdkVersion flutter.targetSdkVersion
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        multiDexEnabled true  // Added for Firebase
+    }
+
+    // ... rest of the existing code ...
+} 

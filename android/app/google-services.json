@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "648547727696",
+    "project_id": "loyalty-card-wallet-6a27e",
+    "storage_bucket": "loyalty-card-wallet-6a27e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:648547727696:android:10a2286695578ec15cd455",
+        "android_client_info": {
+          "package_name": "com.example.external_mad"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVztep6msThSfYkCov2vLtNhqKNckdBEM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
